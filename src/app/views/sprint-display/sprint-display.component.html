@@ -1,0 +1,29 @@
+<div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6">
+    <h2 class="text-2xl font-semibold mb-6 text-gray-800 flex items-center">
+        <span class="mr-2">🏃‍♂️</span> Current Sprint
+    </h2>
+    @if (selectedStories().length) {
+    <ul class="space-y-3 mb-6">
+        @for (story of selectedStories(); track story.id) {
+        <li class="bg-gray-50 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between">
+                <span class="font-medium text-gray-800">{{ story.description }}</span>
+                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-sm font-medium">
+                {{ story.points }} points
+              </span>
+            </div>
+        </li>
+        }
+    </ul>
+    <div class="bg-blue-50 rounded-lg p-4">
+        <p class="text-lg font-semibold text-blue-800 flex items-center justify-center">
+            <span class="mr-2">📊</span> Total Sprint Points: {{ totalPoints() }}
+        </p>
+    </div>
+    } @else {
+    <div class="text-center py-8">
+        <p class="text-gray-500">No stories selected for this sprint.</p>
+        <a routerLink="/plan-sprint" class="text-blue-600 hover:text-blue-800 mt-2 inline-block">Plan your sprint</a>
+    </div>
+    }
+</div>

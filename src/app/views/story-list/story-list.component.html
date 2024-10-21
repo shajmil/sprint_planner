@@ -1,0 +1,24 @@
+<div class="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6">
+    <h2 class="text-2xl font-semibold mb-6 text-gray-800 flex items-center">
+        <span class="mr-2">📚</span> User Stories
+    </h2>
+    @if (stories().length) {
+    <ul class="space-y-3">
+        @for (story of stories(); track story.id) {
+        <li class="bg-gray-50 rounded-lg p-4 hover:shadow-md transition-shadow">
+            <div class="flex items-center justify-between">
+                <span class="font-medium text-gray-800">{{ story.description }}</span>
+                <span class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                {{ story.points }} points
+              </span>
+            </div>
+        </li>
+        }
+    </ul>
+    } @else {
+    <div class="text-center py-8">
+        <p class="text-gray-500">No stories have been added yet.</p>
+        <a routerLink="/add-story" class="text-blue-600 hover:text-blue-800 mt-2 inline-block">Add your first story</a>
+    </div>
+    }
+</div>
