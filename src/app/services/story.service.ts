@@ -25,21 +25,28 @@ export class StoryService {
     this.selectedStories.set([]);
   }
 
-  autoSelectStories(targetPoints: number) {
-    let currentPoints = 0;
-    const selected: Story[] = [];
-    for (const story of this.stories()) {
-      if (currentPoints + story.points <= targetPoints) {
-        selected.push(story);
-        currentPoints += story.points;
-      }
-    }
-    if (selected.length > 0 && currentPoints > 0) {
-      this.selectedStories.set(selected);
-      return true;
-    }
+autoSelectStories(targetPoints: number) {
+  let currentPoints = 0;
+  const selected: Story[] = [];
 
-    return false;  }
+  // Sort stories by points in descending order
+  const sortedStories = this.stories().sort((a, b) => b.points - a.points);
+
+  for (const story of sortedStories) {
+    if (currentPoints + story.points <= targetPoints) {
+      selected.push(story);
+      currentPoints += story.points;
+    }
+  }
+
+  if (selected.length > 0 && currentPoints > 0) {
+    this.selectedStories.set(selected);
+    return true;
+  }
+
+  return false;
+}
+
 
   getStories() {
     return this.stories;
